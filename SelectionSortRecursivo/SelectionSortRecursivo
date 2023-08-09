@@ -1,0 +1,49 @@
+package SelectionSortRecursivo;
+
+class SelectionSortRecursivo{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String[] entrada = sc.nextLine().split(" ");
+
+        int[] nums = new int[entrada.length];
+        for (i = 0; i < entrada.length; i++){
+            nums[i] = Integer.parseInt(entrada[i]);
+        }
+
+    }
+
+    public static void selectionSort(int[] v, int iter){
+        if (iter <= v.length - 1){
+            selectionSort(v, iter)
+        }
+    }
+    //realiza apenas uma selection sort usando recursão.
+    public static void selectionSort(int[] v, idMenor, int i){
+        int i = idMenor + 1;
+        // caso base: o array já foi completamente percorrido, idMenor é de fato o id do menor elemento
+        if (i > v.length - 1){
+            swap(v, idMenor, i);
+        }
+        else if (v[i] < v[idMenor]){
+            idMenor = i;
+            selectionSort(v, idMenor, i++);
+        }
+    }
+    }
+    public static boolean estaOrdenado(int[] v){
+        boolean ordenado = true;
+        for(int i = 0; i < v.length - 1; i++){
+            if (v[i] > v[i + 1]){
+                ordenado = false;
+                break;
+            }
+        }
+        return ordenado;
+    }
+
+    public static void swap(int[] v, int idMenor, int i){
+        int aux = v[i];
+        v[i] = v[idMenor];
+        v[idMenor] = aux;
+    }
+}
