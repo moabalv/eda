@@ -1,6 +1,40 @@
-package LinkedList.Iterativa;
+package TrimLinkedList;
 
-public class Linkedlist {
+import java.util.Scanner;
+
+class TrimLinkedList {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        Linkedlist lista = new Linkedlist();
+        String[] in = sc.nextLine().split(" ");
+        for (int i = 0; i < in.length; i++){
+            lista.addLast(Integer.parseInt(in[i]));
+            
+        }
+        int trimNum = sc.nextInt();
+
+        for (int i = 0; i < trimNum; i++){
+            lista.remove(0);
+            lista.remove(lista.size() - 1);
+        }
+        System.out.println(lista.toString());
+
+    }
+    
+}
+class Node{
+    Integer object;
+    Node next;
+    Node prev;
+
+    public Node(Integer i){
+        this.object = i;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class Linkedlist {
     private Node head;
     private Node tail;
     private int size;
@@ -63,8 +97,15 @@ public class Linkedlist {
         for (int i = 0; i < index - 1; i++){
             aux = aux.next;
         }
+        if (index == this.size - 1){
+            aux.prev.next = null;
+            tail = aux.prev;
+        }
+        else{
         aux.prev.next = aux.next;
         aux.next.prev = aux.prev;
+        }
+        this.size--;
         return aux.object; 
     }
     public int removeFirst(){
@@ -91,7 +132,7 @@ public class Linkedlist {
     }
     
     public int size(){
-        return size + 1;
+        return size;
     }
 
     @Override
@@ -99,21 +140,9 @@ public class Linkedlist {
         String out = "";
         Node aux = head;
         while (aux != null){
-            out += aux.object;
+            out += aux.object + " ";
             aux = aux.next;
         }
-        return out;
-    }
-}
-
-class Node{
-    Integer object;
-    Node next;
-    Node prev;
-
-    public Node(Integer i){
-        this.object = i;
-        this.next = null;
-        this.prev = null;
+        return out.trim();
     }
 }
